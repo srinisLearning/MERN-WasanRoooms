@@ -10,9 +10,6 @@ function App() {
   return (
     <>
       <Navbar />
-      <h3 className="text-primary text-center text-3xl font-thin">
-        Welcome to Wasan Rooms
-      </h3>
 
       <Routes>
         <Route path="/" element={<HomePage />} />
