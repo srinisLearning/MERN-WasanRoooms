@@ -4,6 +4,7 @@ import axios from "axios";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
+import BookingPage from "./pages/BookingPage";
 
 axios.defaults.baseURL = "http://127.0.0.1:6066";
 function App() {
@@ -15,6 +16,7 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/book/:roomId" excat element={<BookingPage />} />
       </Routes>
     </>
   );
