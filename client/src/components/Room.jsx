@@ -6,7 +6,7 @@ const Room = ({ room }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>
-      <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-2 shadow-xl max-w-4xl mx-auto rounded-xl">
+      <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-11 shadow-xl max-w-4xl mx-auto rounded-xl">
         <div>
           <img src={room.imageurls[0]} />
         </div>

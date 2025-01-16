@@ -6,7 +6,7 @@ const Navbar = () => {
     <>
       <div className="flex justify-around bg-primary text-white min-h-16 items-center">
         <div className="flex flex-row">
-          <h3 className="text-2xl">
+          <h3 className="text-3xl font-extrabold text-white">
             <Link to="/">Wasan Rooms</Link>
           </h3>
         </div>

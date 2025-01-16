@@ -18,6 +18,10 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/book/:roomId" excat element={<BookingPage />} />
       </Routes>
+
+      <footer className="bg-primary text-white text-center p-4 h-25 w-full">
+        &copy; 2024 Wasan Rooms
+      </footer>
     </>
   );
 }

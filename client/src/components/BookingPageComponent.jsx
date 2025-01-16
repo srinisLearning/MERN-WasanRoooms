@@ -1,14 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const BookingPageComponent = ({ room }) => {
-  console.log("From BPc", { room });
+  //console.log("From BPc", { room });
   return (
     <>
-      <h3 className="text-primary text-center text-3xl font-thin">
-        Room Booking
-      </h3>
       <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-2 shadow-xl max-w-4xl mx-auto rounded-xl">
-        <div>{/*  <img src={room.imageurls[0]} /> */}</div>
+        <div>
+          {/* {room.imageurls.length > 0 && <img src={room.imageurls[0]} />} */}
+          <img
+            src="../../public/images/hotel_room_1.png"
+            className="w-full h-96 my-1"
+          />
+        </div>
         <div className="flex flex-col mx-auto my-auto">
           <h1 className="text-primary text-xl font-semibold">{room.name}</h1>
           <div className="flex flex-col space-y-6 p-4">
@@ -29,6 +33,9 @@ const BookingPageComponent = ({ room }) => {
             Pay Now
           </button>
         </div>
+      </div>
+      <div className="flex justify-center text-xl text-primary text-center py-3 mx-auto">
+        <Link to="/">Back to Rooms</Link>
       </div>
       )
     </>
