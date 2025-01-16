@@ -32,7 +32,7 @@ const BookingPage = () => {
         src="../../public/images/hotel_banner_2.png"
         className="w-full h-96"
       />
-      <h3 className="text-primary w-full text-center text-3xl font-thin py-2">
+      <h3 className="bg-primary text-white  w-full text-center text-3xl font-thin py-2">
         Booking Page
       </h3>
       {loading ? (

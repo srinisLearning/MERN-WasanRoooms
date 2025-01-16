@@ -10,7 +10,9 @@ app.get("/", (req, res) => {
   res.send("Hello from Wasan World");
 });
 const roomsRoutes = require("./routes/roomRoutes");
+const userRoutes = require("./routes/userRoutes");
 app.use("/api/rooms", roomsRoutes);
+app.use("/api/users", userRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

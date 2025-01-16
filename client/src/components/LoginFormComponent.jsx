@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import ErrorComponent from "./ErrorComponent";
+import axios from "axios";
 
 const LoginFormComponent = () => {
   const [user, setUser] = useState({
@@ -14,10 +15,15 @@ const LoginFormComponent = () => {
       [name]: value,
     });
   };
-  const loginUser = (e) => {
+  const loginUser = async (e) => {
     e.preventDefault();
     if (user.email !== "" && !user.password !== "") {
       console.log(user);
+      try {
+        const result = await axios.post("/api/users/login", user);
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       console.log("Pls enter all the fields");
       <ErrorComponent error="Please fill all the fields" />;

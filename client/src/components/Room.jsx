@@ -22,7 +22,11 @@ const Room = ({ room }) => {
           </p>
           <p>
             <b className="font-extralight">E-Mail : </b>
-            acefw @gmail.com
+            {room.email}
+          </p>
+          <p>
+            <b className="font-extralight">Website : </b>
+            {room.website}
           </p>
 
           <div className="flex space-x-6 p-4">

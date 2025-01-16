@@ -15,7 +15,6 @@ const RoomModal = ({ show, onClose, room }) => {
             <img src={room.imageurls[1]} />
           </div>
           <div className="flex flex-col mx-auto">
-            <p>{room.description}</p>
             <p>
               <b className="font-extralight">City : </b>
               {room.city}
@@ -23,6 +22,19 @@ const RoomModal = ({ show, onClose, room }) => {
             <p>
               <b className="font-extralight">Contact Number : </b>
               {room.phonenumber}
+            </p>
+
+            <p>
+              <b className="font-extralight">E-Mail : </b>
+              {room.email}
+            </p>
+            <p>
+              <b className="font-extralight">Website: </b>
+              {room.website}
+            </p>
+            <p>
+              <b className="font-extralight">Contact Person : </b>
+              Dinesh Kumar
             </p>
             <p>
               <b className="font-extralight">Room Rate : </b>
@@ -38,17 +50,24 @@ const RoomModal = ({ show, onClose, room }) => {
               <b className="font-extralight">Type : {room.type}</b>
             </p>
             <p>
+              <b className="font-extralight">Check Out Time: </b>
+              24 Hours
+            </p>
+            <p>
               <b className="font-extralight">
                 Current Bookings : {room.currentbookings}
               </b>
             </p>
           </div>
         </div>
+        <div className="my-4 max-w-4xl mx-auto">
+          <p>{room.description}</p>
+        </div>
 
         <div className="flex justify-end">
           <button
             onClick={onClose}
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+            className="bg-amber-500 hover:bg-amber-700 text-white font-bold py-2 px-4 rounded"
           >
             Close
           </button>

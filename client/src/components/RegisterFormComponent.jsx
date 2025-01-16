@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
+import ErrorComponent from "./ErrorComponent";
+import SuccessComponent from "./SuccessComponent";
+import LoadingComponent from "./LoadingComponent";
 
 const RegisterFormComponent = () => {
   const [user, setUser] = useState({
@@ -8,6 +12,9 @@ const RegisterFormComponent = () => {
     password: "",
     confirmPassword: "",
   });
+  const [loading, setloading] = useState(false);
+  const [error, seterror] = useState(false);
+  const [success, setsuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -24,15 +31,23 @@ const RegisterFormComponent = () => {
     }
   };
 
-  const registerUser = (e) => {
+  const registerUser = async (e) => {
     e.preventDefault();
     console.log(user);
+    try {
+      const result = await axios.post("/api/users/register", user);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const inputFieldClass =
     "mt-1 block w-full px-3 py-2 gap-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm";
   return (
     <>
+      {loading && <LoadingComponent />}
+      {success && <SuccessComponent success="User Registered Successfully" />}
+      {error && <ErrorComponent error="Email already registred" />}
       <form className="mt-8 space-y-6">
         <div>
           <label
