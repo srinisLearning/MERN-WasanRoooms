@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import ErrorComponent from "./ErrorComponent";
+
 import axios from "axios";
+import ErrorComponent from "./ErrorComponent";
+import LoadingComponent from "./LoadingComponent";
 
 const LoginFormComponent = () => {
   const [user, setUser] = useState({
     email: "",
     password: "",
   });
+
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,13 +25,19 @@ const LoginFormComponent = () => {
     if (user.email !== "" && !user.password !== "") {
       console.log(user);
       try {
+        setLoading(true);
         const result = await axios.post("/api/users/login", user);
+        setLoading(false);
+        localStorage.setItem("loggedInUser", JSON.stringify(result.data));
+        window.location.href = "/";
       } catch (error) {
         console.log(error);
+        setLoading(false);
+        setError(true);
       }
     } else {
       console.log("Pls enter all the fields");
-      <ErrorComponent error="Please fill all the fields" />;
+      setError(true);
     }
   };
 
@@ -34,6 +45,9 @@ const LoginFormComponent = () => {
     "mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-amber-500 focus:border-amber-500 sm:text-sm";
   return (
     <>
+      {loading && <LoadingComponent />}
+      {error && <ErrorComponent error=" Invalid Credentials Login Failed" />}
+
       <form className="mt-8 space-y-6">
         <div>
           <label

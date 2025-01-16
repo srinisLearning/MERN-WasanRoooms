@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 const BookingPageComponent = ({ room }) => {
   //console.log("From BPc", { room });
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
   return (
     <>
       <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-2 shadow-xl max-w-4xl mx-auto rounded-xl">
@@ -16,8 +17,9 @@ const BookingPageComponent = ({ room }) => {
         <div className="flex flex-col mx-auto my-auto">
           <h1 className="text-primary text-xl font-semibold">{room.name}</h1>
           <div className="flex flex-col space-y-6 p-4">
-            Name : Srini <br />
-            Email : abc@def.com <br />
+            Name : {user.name}
+            <br />
+            Email : {user.email} <br />
             From Date : 2021-09-01 <br />
             To Date : 2021-09-10 <br />
             No of Persons : {room.maxcount}

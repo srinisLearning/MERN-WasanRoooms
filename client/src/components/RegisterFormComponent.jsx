@@ -12,9 +12,9 @@ const RegisterFormComponent = () => {
     password: "",
     confirmPassword: "",
   });
-  const [loading, setloading] = useState(false);
-  const [error, seterror] = useState(false);
-  const [success, setsuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -35,9 +35,21 @@ const RegisterFormComponent = () => {
     e.preventDefault();
     console.log(user);
     try {
+      setLoading(true);
       const result = await axios.post("/api/users/register", user);
+      setLoading(false);
+      setSuccess(true);
+      setUser({
+        name: "",
+        email: "",
+        mobile: "",
+        password: "",
+        confirmPassword: "",
+      });
     } catch (error) {
       console.log(error);
+      setLoading(false);
+      setError(true);
     }
   };
 
@@ -46,8 +58,8 @@ const RegisterFormComponent = () => {
   return (
     <>
       {loading && <LoadingComponent />}
-      {success && <SuccessComponent success="User Registered Successfully" />}
-      {error && <ErrorComponent error="Email already registred" />}
+      {success && <SuccessComponent message="User Registered Successfully" />}
+      {error && <ErrorComponent error="Error Registering User" />}
       <form className="mt-8 space-y-6">
         <div>
           <label
