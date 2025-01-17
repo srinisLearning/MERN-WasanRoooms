@@ -38,7 +38,11 @@ const RoomModal = ({ show, onClose, room }) => {
             </p>
             <p>
               <b className="font-extralight">Room Rate : </b>
-              &#8377; {room.rentperday}
+              &#8377; {room.rentperday} / Day for 2 Persons
+            </p>
+            <p>
+              <b className="font-extralight">Additional Person Rate : </b>
+              30 % of Room Rate / Day
             </p>
             <p>
               <b className="font-extralight">

@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import BookingPageComponent from "../components/BookingPageComponent";
 import LoadingComponent from "../components/LoadingComponent";
-
+import ErrorComponent from "../components/ErrorComponent";
 const BookingPage = () => {
   const { roomId } = useParams();
   console.log("BP", roomId);
@@ -18,6 +18,7 @@ const BookingPage = () => {
       .then((response) => {
         //console.log(response.data);
         setRoom(response.data);
+        console.log("Room", room);
         setLoading(false);
       })
       .catch((error) => {

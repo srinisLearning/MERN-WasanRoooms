@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const Room = ({ room }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
   return (
     <>
       <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-11 shadow-xl max-w-4xl mx-auto rounded-xl">
@@ -30,12 +31,14 @@ const Room = ({ room }) => {
           </p>
 
           <div className="flex space-x-6 p-4">
-            <Link
-              to={`/book/${room._id}`}
-              className="bg-amber-500 text-white px-4 py-2 rounded-md"
-            >
-              <button>Book Now</button>
-            </Link>
+            {user && (
+              <Link
+                to={`/book/${room._id}`}
+                className="bg-amber-500 text-white px-4 py-2 rounded-md"
+              >
+                <button>Book Now</button>
+              </Link>
+            )}
 
             <button
               className="bg-amber-800 text-white px-4 py-2 rounded-md"

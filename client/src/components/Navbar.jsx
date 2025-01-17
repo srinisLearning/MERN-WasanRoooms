@@ -11,10 +11,13 @@ const Navbar = () => {
   return (
     <>
       <div className="flex justify-around bg-primary text-white min-h-16 items-center">
-        <div className="flex flex-row">
+        <div className="flex flex-col">
           <h3 className="text-3xl font-extrabold text-white">
             <Link to="/">Wasan Rooms</Link>
           </h3>
+          <span className="text-white text-center text-md">
+            Your Perfect Stay, Just a Click Away!
+          </span>
         </div>
         <div className="flex flex-row">
           {user ? (
