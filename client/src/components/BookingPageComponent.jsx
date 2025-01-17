@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { DatePicker, Space } from "antd";
 const { RangePicker } = DatePicker;
+import moment from "moment";
+import axios from "axios";
 
 const BookingPageComponent = ({ room }) => {
   //console.log("From BPc", { room });
@@ -20,6 +22,21 @@ const BookingPageComponent = ({ room }) => {
     additionalOccupancyCost = additionalOccupancy * basicCost * 0.3;
   }
 
+  const bookRoom = async () => {
+    const bookingDetails = {
+      roomName: room.name,
+      roomid: room._id,
+      userid: user._id,
+      userName: user.name,
+      fromdate: dates[0].format("DD-MM-YYYY"),
+      todate: dates[1].format("DD-MM-YYYY"),
+      totalDays: diff,
+      totalAmount: basicCost + additionalOccupancyCost,
+      transactionId: "",
+    };
+    console.log(bookingDetails);
+    const result = axios.post("/api/bookings/bookRoom", bookingDetails);
+  };
   return (
     <>
       <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-2 shadow-xl max-w-4xl mx-auto rounded-xl">
@@ -32,9 +49,13 @@ const BookingPageComponent = ({ room }) => {
         </div>
         <div className="flex flex-col mx-auto my-auto">
           <h1 className="text-primary text-xl font-semibold">{room.name}</h1>
+          <hr className="my-1" />
           <div className="flex flex-col space-y-2 p-4">
             <div>
               <span className="font-extralight"> Name : </span> {user.name}
+            </div>
+            <div>
+              <span className="font-extralight">Mobile :</span> {user.mobile}{" "}
             </div>
 
             <div>
@@ -91,7 +112,10 @@ const BookingPageComponent = ({ room }) => {
             </div>
           )}
 
-          <button className="bg-amber-500 text-white px-4 py-2 rounded-md">
+          <button
+            className="bg-amber-500 text-white px-4 py-2 rounded-md"
+            onClick={bookRoom}
+          >
             Pay Now
           </button>
         </div>
