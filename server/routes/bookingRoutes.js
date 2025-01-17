@@ -27,7 +27,7 @@ router.post("/bookRoom", async (req, res) => {
       transactionId: "2345",
     });
     await booking.save();
-    res.json(booking);
+    res.json({ message: "Room Booked successfully", booking });
   } catch (error) {
     res.status(400).json({ message: error });
   }
