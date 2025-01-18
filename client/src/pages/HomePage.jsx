@@ -27,7 +27,7 @@ const HomePage = () => {
         console.log(error);
       });
   }, []);
-  console.log(citySearch);
+  //console.log(citySearch);
   const filterByRoomName = () => {
     const filteredRooms = rooms2.filter((room) =>
       room.name.toLowerCase().includes(nameSearch.toLowerCase())
@@ -54,7 +54,7 @@ const HomePage = () => {
         </div>
       ) : (
         <>
-          <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-11 shadow-xl max-w-4xl mx-auto rounded-xl">
+          <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-3 shadow-xl max-w-4xl mx-auto rounded-xl">
             <div className="flex flex-col mx-auto my-auto">
               <input
                 placeholder="Search Room By City"

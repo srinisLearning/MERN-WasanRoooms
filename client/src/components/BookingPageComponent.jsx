@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { DatePicker, Space } from "antd";
+import StripeCheckout from "react-stripe-checkout";
 const { RangePicker } = DatePicker;
 import moment from "moment";
 import axios from "axios";
@@ -13,7 +14,7 @@ const BookingPageComponent = ({ room }) => {
   const [additionalOccupancy, setAdditionalOccupancy] = React.useState(0);
   let additionalOccupancyCost = 0;
 
-  console.log(dates);
+  //console.log(dates);
   let diff = 0;
   diff = Math.floor((dates[1] - dates[0]) / (1000 * 60 * 60 * 24));
   let costPerNight = room.rentperday;
@@ -21,8 +22,10 @@ const BookingPageComponent = ({ room }) => {
   if (additionalOccupancy > 0) {
     additionalOccupancyCost = additionalOccupancy * basicCost * 0.3;
   }
+  let totalCost = basicCost + additionalOccupancyCost;
 
-  const bookRoom = async () => {
+  const bookRoom = async () => {};
+  const onToken = async (token) => {
     const bookingDetails = {
       roomName: room.name,
       roomid: room._id,
@@ -33,9 +36,11 @@ const BookingPageComponent = ({ room }) => {
       totalDays: diff,
       totalAmount: basicCost + additionalOccupancyCost,
       transactionId: "",
+      token: token,
     };
-    console.log(bookingDetails);
+    //console.log(bookingDetails);
     const result = axios.post("/api/bookings/bookRoom", bookingDetails);
+    //console.log(token);
   };
   return (
     <>
@@ -106,18 +111,25 @@ const BookingPageComponent = ({ room }) => {
                 </p>
                 <p>Additional Occupancy Cost : {additionalOccupancyCost}</p>
                 <p className="text-primary font-extrabold my-3">
-                  Total Cost : {basicCost + additionalOccupancyCost}
+                  Total Cost : {totalCost}
                 </p>
               </div>
             </div>
           )}
-
-          <button
-            className="bg-amber-500 text-white px-4 py-2 rounded-md"
-            onClick={bookRoom}
-          >
-            Pay Now
-          </button>
+          {dates && (
+            <div>
+              <StripeCheckout
+                amount={totalCost * 100}
+                currency="INR"
+                token={onToken}
+                stripeKey="pk_test_51LFsZzSJDYv42pi4MhvAdwPuYV2HTzzDVTklvxuOt4o0le6vyYttWFP3GzTQ99eLi4rC6QYritaKmBXRsxDlXGoc00c5cl8hMc"
+              >
+                <button className="bg-amber-500 text-white px-4 py-2 rounded-md">
+                  Pay Now
+                </button>
+              </StripeCheckout>
+            </div>
+          )}
         </div>
       </div>
       <div className="flex justify-center text-xl text-primary text-center py-3 mx-auto">

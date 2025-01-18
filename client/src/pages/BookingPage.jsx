@@ -6,7 +6,7 @@ import LoadingComponent from "../components/LoadingComponent";
 import ErrorComponent from "../components/ErrorComponent";
 const BookingPage = () => {
   const { roomId } = useParams();
-  console.log("BP", roomId);
+  //console.log("BP", roomId);
   const [room, setRoom] = useState([]);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ const BookingPage = () => {
       .then((response) => {
         //console.log(response.data);
         setRoom(response.data);
-        console.log("Room", room);
+        //console.log("Room", room);
         setLoading(false);
       })
       .catch((error) => {
