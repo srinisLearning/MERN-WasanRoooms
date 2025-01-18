@@ -48,7 +48,7 @@ router.post("/bookRoom", async (req, res) => {
         todate,
         totalDays,
         totalAmount,
-        transactionId: "2345",
+        transactionId: uuidv4().substring(0, 8),
       });
       await booking.save();
       console.log("Payment", payment);
@@ -60,4 +60,29 @@ router.post("/bookRoom", async (req, res) => {
   }
 });
 
+router.get("/getBookingsById/:id", async (req, res) => {
+  const userid = req.params.id;
+  console.log(userid);
+  try {
+    const bookings = await Booking.find({ userid });
+    res.send(bookings);
+  } catch (error) {
+    res.status(400).send("No Bookings Found");
+  }
+});
+
+router.post("/cancelbooking", async (req, res) => {
+  const { bookingid } = req.body;
+
+  try {
+    const bookingitem = await Booking.findOne({ _id: bookingid });
+    bookingitem.status = "cancelled";
+    await bookingitem.save();
+
+    res.send("Booking deleted successfully");
+  } catch (error) {
+    console.log(error);
+    return res.status(400).json({ message: "something went wrong" });
+  }
+});
 module.exports = router;

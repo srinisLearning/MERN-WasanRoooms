@@ -50,7 +50,7 @@ const BookingPageComponent = ({ room }) => {
         "Your Room has booked succeessfully",
         "success"
       ).then((result) => {
-        window.location.href = "/bookings";
+        window.location.href = "/mybookings";
       });
     } catch (error) {
       setLoading(false);

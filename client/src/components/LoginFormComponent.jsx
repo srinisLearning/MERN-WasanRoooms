@@ -29,7 +29,7 @@ const LoginFormComponent = () => {
         const result = await axios.post("/api/users/login", user);
         setLoading(false);
         localStorage.setItem("loggedInUser", JSON.stringify(result.data));
-        window.location.href = "/";
+        window.location.href = "/home";
       } catch (error) {
         console.log(error);
         setLoading(false);

@@ -16,11 +16,8 @@ const bookingRoutes = require("./routes/bookingRoutes");
 
 app.use("/api/rooms", roomsRoutes);
 app.use("/api/users", userRoutes);
-try {
-  app.use("/api/bookings", bookingRoutes);
-} catch (error) {
-  console.log(error);
-}
+
+app.use("/api/bookings", bookingRoutes);
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);

@@ -13,7 +13,7 @@ const Navbar = () => {
       <div className="flex justify-around bg-primary text-white min-h-16 items-center">
         <div className="flex flex-col">
           <h3 className="text-3xl font-extrabold text-white">
-            <Link to="/">Wasan Rooms</Link>
+            <Link to="/home">Wasan Rooms</Link>
           </h3>
           <span className="text-white text-center text-md">
             Your Perfect Stay, Just a Click Away!
@@ -24,7 +24,7 @@ const Navbar = () => {
             <>
               <div className="px-4 py-2">{user.name}</div>
               <div className="px-4 py-2">
-                <a href="/bookings">BOOKINGS</a>
+                <a href="/mybookings">MY BOOKINGS</a>
               </div>
               <div className="px-4 py-2">
                 <button onClick={logout}>LOGOUT</button>
@@ -44,6 +44,30 @@ const Navbar = () => {
         {/* end of column */}
       </div>{" "}
       {/*end of row */}
+      {user && (
+        <div className="grid grid-rows-1 grid-cols-4 gap-3 border border-primary-300  p-4 my-2 shadow-xl max-w-4xl mx-auto rounded-xl text-xs">
+          <div>
+            {" "}
+            <span className="font-extralight">Name :</span>{" "}
+            <span className="text-primary font-extrabold"> {user.name}</span>
+          </div>
+          <div>
+            <span className="font-extralight"> E-Mail : </span>
+            <span className="text-primary font-extrabold">{user.email}</span>
+          </div>
+          <div>
+            {" "}
+            <span className="font-extralight">Mobile :</span>
+            <span className="text-primary font-extrabold"> {user.mobile}</span>
+          </div>
+          <div>
+            <span className="font-extralight">User Status : </span>
+            <span className="text-primary font-extrabold">
+              {user.isAdmin ? "Admin" : "User"}
+            </span>
+          </div>
+        </div>
+      )}
     </>
   );
 };
