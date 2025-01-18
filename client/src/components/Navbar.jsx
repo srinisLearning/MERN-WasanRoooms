@@ -23,7 +23,9 @@ const Navbar = () => {
           {user ? (
             <>
               <div className="px-4 py-2">{user.name}</div>
-              <div className="px-4 py-2">BOOKINGS</div>
+              <div className="px-4 py-2">
+                <a href="/bookings">BOOKINGS</a>
+              </div>
               <div className="px-4 py-2">
                 <button onClick={logout}>LOGOUT</button>
               </div>

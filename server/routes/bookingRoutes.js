@@ -22,11 +22,11 @@ router.post("/bookRoom", async (req, res) => {
   } = req.body;
 
   try {
-    const customer = await stripe.customers.create({
+    /*   const customer = await stripe.customers.create({
       email: token.email,
       source: token.id,
     });
-    /*  const payment = await stripe.charges.create(
+     const payment = await stripe.charges.create(
       {
         amount: totalAmount * 100,
         currency: "inr",

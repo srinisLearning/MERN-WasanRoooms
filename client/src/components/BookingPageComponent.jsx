@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 import { DatePicker, Space } from "antd";
 import StripeCheckout from "react-stripe-checkout";
 const { RangePicker } = DatePicker;
-import moment from "moment";
+
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const BookingPageComponent = ({ room }) => {
   //console.log("From BPc", { room });
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  const [loading, setLoading] = React.useState(false);
 
   const [dates, setDates] = React.useState("");
   const [additionalOccupancy, setAdditionalOccupancy] = React.useState(0);
@@ -39,7 +41,24 @@ const BookingPageComponent = ({ room }) => {
       token: token,
     };
     //console.log(bookingDetails);
-    const result = axios.post("/api/bookings/bookRoom", bookingDetails);
+    try {
+      setLoading(true);
+      const result = axios.post("/api/bookings/bookRoom", bookingDetails);
+      setLoading(false);
+      Swal.fire(
+        "Congrats",
+        "Your Room has booked succeessfully",
+        "success"
+      ).then((result) => {
+        window.location.href = "/bookings";
+      });
+    } catch (error) {
+      setLoading(false);
+      // console.log(error);
+
+      Swal.fire("Sorry!!!", "Something went wrong , please try later", "error");
+    }
+
     //console.log(token);
   };
   return (
