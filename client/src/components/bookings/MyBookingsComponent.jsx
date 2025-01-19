@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
+import LoadingComponent from "../utils/LoadingComponent";
 
 const MyBookingsComponent = () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
@@ -25,11 +26,28 @@ const MyBookingsComponent = () => {
     };
     fetchBookings();
   }, []);
-  async function cancelBooking(bookingid, roomid) {
+  const confirmCancelBooking = (bookingId) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "Do you want to cancel this room booking?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, cancel it!",
+      cancelButtonText: "No, keep it",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        cancelBooking(bookingId);
+      } else {
+        window.location.href = "/mybookings";
+      }
+    });
+  };
+
+  async function cancelBooking(bookingId) {
     try {
       setloading(true);
       const result = await axios.post("/api/bookings/cancelbooking", {
-        bookingid: bookingid,
+        bookingid: bookingId,
       });
       setloading(false);
       Swal.fire(
@@ -86,7 +104,7 @@ const MyBookingsComponent = () => {
                   <div className="text-right mt-2">
                     <button
                       className="btn bg-amber-600 text-white boder-solid border-amber-600 p-1 rounded-lg text-xs"
-                      onClick={() => cancelBooking(booking._id)}
+                      onClick={() => confirmCancelBooking(booking._id)}
                     >
                       Cancel Booking
                     </button>

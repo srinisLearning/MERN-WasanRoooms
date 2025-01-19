@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Room from "../components/Room";
-import LoadingComponent from "../components/LoadingComponent";
-import ErrorComponent from "../components/ErrorComponent";
+import Room from "../components/room/Room";
+import LoadingComponent from "../components/utils/LoadingComponent";
+import ErrorComponent from "../components/utils/ErrorComponent";
 
 const HomePage = () => {
   const [rooms, setRooms] = useState([]);
@@ -44,7 +44,7 @@ const HomePage = () => {
 
   return (
     <>
-      <img src="images/hotel_banner_3.png" className="w-full h-96" />
+      <img src="/images/hotel_banner_3.png" className="w-full h-96" />
       <h3 className="bg-primary w-full text-white text-center text-3xl font-thin py-2">
         Room List
       </h3>

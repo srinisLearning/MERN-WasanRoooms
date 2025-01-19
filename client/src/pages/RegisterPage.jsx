@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import RegisterFormComponent from "../components/RegisterFormComponent";
+import RegisterFormComponent from "../components/auth/RegisterFormComponent";
 
 const RegisterPage = () => {
   return (

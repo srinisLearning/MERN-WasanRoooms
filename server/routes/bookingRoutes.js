@@ -51,7 +51,7 @@ router.post("/bookRoom", async (req, res) => {
         transactionId: uuidv4().substring(0, 8),
       });
       await booking.save();
-      console.log("Payment", payment);
+      //console.log("Payment", payment);
       res.send("Payment Successfull and Room Booked");
     }
   } catch (error) {
@@ -62,7 +62,7 @@ router.post("/bookRoom", async (req, res) => {
 
 router.get("/getBookingsById/:id", async (req, res) => {
   const userid = req.params.id;
-  console.log(userid);
+  //console.log(userid);
   try {
     const bookings = await Booking.find({ userid });
     res.send(bookings);
@@ -83,6 +83,15 @@ router.post("/cancelbooking", async (req, res) => {
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: "something went wrong" });
+  }
+});
+
+router.get("/getallbookings", async (req, res) => {
+  try {
+    const bookings = await Booking.find({});
+    res.send(bookings);
+  } catch (error) {
+    return res.status(400).json({ message: error });
   }
 });
 module.exports = router;

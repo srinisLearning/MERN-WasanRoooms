@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import LoginFormComponent from "../components/LoginFormComponent";
+import LoginFormComponent from "../components/auth/LoginFormComponent";
 
 const LoginPage = () => {
   return (

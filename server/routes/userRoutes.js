@@ -22,7 +22,7 @@ router.post("/login", async (req, res) => {
   try {
     const user = await User.findOne({ email, password });
     if (user) {
-      console.log("User Logged in successfully");
+      //console.log("User Logged in successfully");
       const loggedInUser = {
         name: user.name,
         email: user.email,

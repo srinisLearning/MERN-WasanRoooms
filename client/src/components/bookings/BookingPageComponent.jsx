@@ -66,10 +66,7 @@ const BookingPageComponent = ({ room }) => {
       <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-2 shadow-xl max-w-4xl mx-auto rounded-xl">
         <div>
           {/* {room.imageurls.length > 0 && <img src={room.imageurls[0]} />} */}
-          <img
-            src="../../public/images/hotel_room_1.png"
-            className="w-full h-96 my-1"
-          />
+          <img src="/images/hotel_room_1.png" className="w-full h-96 my-1" />
         </div>
         <div className="flex flex-col mx-auto my-auto">
           <h1 className="text-primary text-xl font-semibold">{room.name}</h1>

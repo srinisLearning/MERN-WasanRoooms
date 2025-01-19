@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const LandingPage = () => {
   return (
     <>
-      <div className="flex flex-col items-center justify-center space-y-6 h-screen bg-[url('../../public/images/landing_page_img.png')] bg-cover bg-center bg-no-repeat">
+      <div className="flex flex-col items-center justify-center space-y-6 h-screen bg-[url('/images/landing_page_img.png')] bg-cover bg-center bg-no-repeat">
         <h1 className="text-4xl font-bold text-amber-700">
           Welcome to Wasan Rooms
         </h1>

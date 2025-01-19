@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import BookingPageComponent from "../components/BookingPageComponent";
-import LoadingComponent from "../components/LoadingComponent";
-import ErrorComponent from "../components/ErrorComponent";
+import BookingPageComponent from "../components/bookings/BookingPageComponent";
+import LoadingComponent from "../components/utils/LoadingComponent";
+import ErrorComponent from "../components/utils/ErrorComponent";
 const BookingPage = () => {
   const { roomId } = useParams();
   //console.log("BP", roomId);
@@ -29,10 +29,7 @@ const BookingPage = () => {
 
   return (
     <>
-      <img
-        src="../../public/images/hotel_banner_2.png"
-        className="w-full h-96"
-      />
+      <img src="/images/hotel_banner_2.png" className="w-full h-96" />
       <h3 className="bg-primary text-white  w-full text-center text-3xl font-thin py-2">
         Booking Page
       </h3>

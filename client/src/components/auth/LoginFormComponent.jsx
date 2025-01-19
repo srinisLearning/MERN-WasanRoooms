@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 import axios from "axios";
-import ErrorComponent from "./ErrorComponent";
-import LoadingComponent from "./LoadingComponent";
+import ErrorComponent from "../utils/ErrorComponent";
+import LoadingComponent from "../utils/LoadingComponent";
 
 const LoginFormComponent = () => {
   const [user, setUser] = useState({
