@@ -11,7 +11,7 @@ const Room = ({ room }) => {
     <>
       <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-11 shadow-xl max-w-4xl mx-auto rounded-xl">
         <div>
-          <img src={room.imageurls[0]} />
+          <img src={room.imageurl} />
         </div>
         <div className="flex flex-col mx-auto my-auto">
           <h1 className="text-primary text-xl font-semibold">{room.name}</h1>

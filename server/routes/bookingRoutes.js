@@ -94,4 +94,31 @@ router.get("/getallbookings", async (req, res) => {
     return res.status(400).json({ message: error });
   }
 });
+
+router.delete("/deleteBooking/:id", async (req, res) => {
+  const bookingid = req.params.id;
+  try {
+    await Booking.findByIdAndDelete(bookingid);
+    res.send("Booking deleted successfully");
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
+router.put("/updateBookingStatus/:id", async (req, res) => {
+  const bookingid = req.params.id;
+  //console.log(bookingid);
+  try {
+    const booking = await Booking.findById(bookingid);
+    if (booking) {
+      booking.status = "cancelled";
+      await booking.save();
+      res.send("Booking status updated to cancelled");
+    } else {
+      res.status(404).send("Booking not found");
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
 module.exports = router;

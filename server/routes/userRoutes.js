@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const User = require("../models/userModel");
+const mongoose = require("mongoose");
 
 router.post("/register", async (req, res) => {
   const { name, email, mobile, password } = req.body;
@@ -42,4 +43,74 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.get("/getallusers", async (req, res) => {
+  try {
+    const users = await User.find({});
+    res.send(users);
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+router.get("/getUserById/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  console.log(userId);
+  if (mongoose.Types.ObjectId.isValid(userId)) {
+    const user = await User.findById(userId);
+    if (user) {
+      res.json(user);
+      console.log(user);
+    } else {
+      res.status(404).json({ error: "User not found" });
+    }
+  } else {
+    res.status(400).json({ error: "Invalid user  ID" });
+  }
+});
+
+router.delete("/deleteUser/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  console.log(userId);
+
+  try {
+    await User.findOneAndDelete({ _id: userId });
+    res.send("User Deleted Successfully");
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
+/* router.put("/makeUserAdmin/:userId", async (req, res) => {
+  const userId = req.params.userId;
+
+  console.log(userId);
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      { isAdmin: true }
+    );
+    res.send(user);
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+}); */
+router.put("/updateUser/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const { name, email, mobile, password } = req.body;
+
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: userId },
+      { name, email, mobile, password, isAdmin: true },
+      { new: true }
+    );
+    if (user) {
+      res.send({ message: "User Updated Successfully", user });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
 module.exports = router;

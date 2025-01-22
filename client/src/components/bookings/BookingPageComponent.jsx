@@ -10,6 +10,7 @@ import Swal from "sweetalert2";
 const BookingPageComponent = ({ room }) => {
   //console.log("From BPc", { room });
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  console.log(user);
   const [loading, setLoading] = React.useState(false);
 
   const [dates, setDates] = React.useState("");
@@ -61,13 +62,36 @@ const BookingPageComponent = ({ room }) => {
 
     //console.log(token);
   };
+
+  const roomTypeChange = (e) => {
+    console.log(e.target.value);
+    switch (e.target.value) {
+      case "Single Occupancy Standard":
+        costPerNight = room.singleoccupancystandard;
+        break;
+      case "Double Occupancy Standard":
+        costPerNight = room.doubleoccupancystandard;
+        break;
+      case "Double Occupancy Premium":
+        costPerNight = room.doubleoccupancypremium;
+        break;
+      case "Suite":
+        costPerNight = room.suite;
+        break;
+      default:
+        costPerNight = room.rentperday;
+    }
+    basicCost = costPerNight * diff;
+    totalCost = basicCost + additionalOccupancyCost;
+  };
   return (
     <>
       <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-2 shadow-xl max-w-4xl mx-auto rounded-xl">
         <div>
           {/* {room.imageurls.length > 0 && <img src={room.imageurls[0]} />} */}
-          <img src="/images/hotel_room_1.png" className="w-full h-96 my-1" />
+          <img src={room.imageurl} />
         </div>
+
         <div className="flex flex-col mx-auto my-auto">
           <h1 className="text-primary text-xl font-semibold">{room.name}</h1>
           <hr className="my-1" />
@@ -83,7 +107,30 @@ const BookingPageComponent = ({ room }) => {
               <span className="font-extralight">Email :</span> {user.email}{" "}
             </div>
           </div>
+          <div>
+            <p className="flex m-3 p-1 items-center">
+              RoomType
+              <select
+                className=" border border-primary max-w-60 mx-2 py-1"
+                name="roomType"
+                id="roomType"
+                onChange={roomTypeChange}
+              >
+                <option value="Single Occupancy | Standard">
+                  Single Occupancy | Standard
+                </option>
+                <option value="Double Occupancy | Standard">
+                  Double Occupancy | Standard
+                </option>
+                <option value="Double Occupancy | Premium">
+                  Double Occupancy | Premium
+                </option>
+                <option value="Suite">Suite</option>
+              </select>
+            </p>
+          </div>
           <hr className="my-1" />
+          {/*  */}
           <div>
             <Space direction="vertical" size={12}>
               <RangePicker
@@ -122,7 +169,6 @@ const BookingPageComponent = ({ room }) => {
                 <hr className="my-3" />
                 Rate per Day : {room.rentperday}
                 <p>
-                  {" "}
                   Cost for {diff} days : {basicCost}
                 </p>
                 <p>Additional Occupancy Cost : {additionalOccupancyCost}</p>
@@ -149,7 +195,7 @@ const BookingPageComponent = ({ room }) => {
         </div>
       </div>
       <div className="flex justify-center text-xl text-primary text-center py-3 mx-auto">
-        <Link to="/">Back to Rooms</Link>
+        <Link to="/home">Back to Rooms</Link>
       </div>
       )
     </>

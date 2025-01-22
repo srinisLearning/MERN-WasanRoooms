@@ -19,7 +19,7 @@ router.get("/getRoomById/:id", async (req, res) => {
     const room = await Room.findById(roomId);
     if (room) {
       res.json(room);
-      // console.log(room);
+      //console.log(room);
     } else {
       res.status(404).json({ error: "Room not found" });
     }

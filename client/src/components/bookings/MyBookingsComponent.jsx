@@ -18,7 +18,7 @@ const MyBookingsComponent = () => {
         const result = await axios.get(
           `/api/bookings/getBookingsById/${user._id}`
         );
-        console.log(result.data);
+        // console.log(result.data);
         setMyBookings(result.data);
       } catch (error) {
         console.log(error);

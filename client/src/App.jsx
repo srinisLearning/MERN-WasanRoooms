@@ -11,9 +11,12 @@ import AdminPage from "./pages/admin/AdminPage";
 import AdminUserPage from "./pages/admin/AdminUserPage";
 import AdminRoomPage from "./pages/admin/AdminRoomPage";
 import AdminBookingsPage from "./pages/admin/AdminBookingsPage";
-
+//import "dotenv/config";
+//BASE_URL = process.env.REACT_APP_API_URL;
+//axios.defaults.baseURL = BASE_URL;
 axios.defaults.baseURL = " http://127.0.0.1:6066";
 function App() {
+  //console.log(process.env.REACT_APP_API_URL);
   return (
     <>
       <Navbar />
