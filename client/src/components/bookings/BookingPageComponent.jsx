@@ -12,20 +12,22 @@ const BookingPageComponent = ({ room }) => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
   console.log(user);
   const [loading, setLoading] = React.useState(false);
-
+  const [roomType, setRoomType] = React.useState("Single Occupancy Standard");
   const [dates, setDates] = React.useState("");
   const [additionalOccupancy, setAdditionalOccupancy] = React.useState(0);
+  const [costFactor, setCostFactor] = React.useState(1);
   let additionalOccupancyCost = 0;
 
   //console.log(dates);
   let diff = 0;
   diff = Math.floor((dates[1] - dates[0]) / (1000 * 60 * 60 * 24));
-  let costPerNight = room.rentperday;
-  let basicCost = costPerNight * diff;
+  let basicCost = room.rentperday;
   if (additionalOccupancy > 0) {
     additionalOccupancyCost = additionalOccupancy * basicCost * 0.3;
   }
-  let totalCost = basicCost + additionalOccupancyCost;
+
+  let totalAmountPerDay = basicCost * costFactor + additionalOccupancyCost;
+  let totalAmount = totalAmountPerDay * diff;
 
   const bookRoom = async () => {};
   const onToken = async (token) => {
@@ -37,7 +39,9 @@ const BookingPageComponent = ({ room }) => {
       fromdate: dates[0].format("DD-MM-YYYY"),
       todate: dates[1].format("DD-MM-YYYY"),
       totalDays: diff,
-      totalAmount: basicCost + additionalOccupancyCost,
+      roomType: roomType,
+      additionalOccupancy: additionalOccupancy,
+      totalAmount: totalAmount,
       transactionId: "",
       token: token,
     };
@@ -66,23 +70,27 @@ const BookingPageComponent = ({ room }) => {
   const roomTypeChange = (e) => {
     console.log(e.target.value);
     switch (e.target.value) {
-      case "Single Occupancy Standard":
-        costPerNight = room.singleoccupancystandard;
+      case "1":
+        setCostFactor(1);
+        setRoomType("Single Occupancy Standard");
         break;
-      case "Double Occupancy Standard":
-        costPerNight = room.doubleoccupancystandard;
+      case "2":
+        setCostFactor(1.6);
+        setRoomType("Double Occupancy Standard");
+
         break;
-      case "Double Occupancy Premium":
-        costPerNight = room.doubleoccupancypremium;
+      case "3":
+        setCostFactor(2.4);
+        setRoomType("Double Occupancy Premium");
         break;
-      case "Suite":
-        costPerNight = room.suite;
+      case "4":
+        setCostFactor(4);
+        setRoomType("Suite");
         break;
       default:
-        costPerNight = room.rentperday;
+        setCostFactor(1);
+        setRoomType("Single Occupancy Standard");
     }
-    basicCost = costPerNight * diff;
-    totalCost = basicCost + additionalOccupancyCost;
   };
   return (
     <>
@@ -116,16 +124,10 @@ const BookingPageComponent = ({ room }) => {
                 id="roomType"
                 onChange={roomTypeChange}
               >
-                <option value="Single Occupancy | Standard">
-                  Single Occupancy | Standard
-                </option>
-                <option value="Double Occupancy | Standard">
-                  Double Occupancy | Standard
-                </option>
-                <option value="Double Occupancy | Premium">
-                  Double Occupancy | Premium
-                </option>
-                <option value="Suite">Suite</option>
+                <option value="1">Single Occupancy | Standard</option>
+                <option value="2">Double Occupancy | Standard</option>
+                <option value="3">Double Occupancy | Premium</option>
+                <option value="4">Suite</option>
               </select>
             </p>
           </div>
@@ -146,34 +148,44 @@ const BookingPageComponent = ({ room }) => {
           {dates && (
             <div>
               <div>
-                <p className="m-3 p-1 border border-primary max-w-56">
-                  Additional Occupancy :{" "}
-                  <select
-                    className=""
-                    name="occupancy"
-                    id="occupancy"
-                    onChange={(e) => {
-                      setAdditionalOccupancy(e.target.value);
-                    }}
-                  >
-                    <option value="0">0</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                  </select>
-                </p>
+                {roomType !== "Single Occupancy Standard" &&
+                  roomType !== "Suite" && (
+                    <p className="m-3 p-1 border border-primary max-w-56">
+                      Additional Occupancy :{" "}
+                      <select
+                        className=""
+                        name="occupancy"
+                        id="occupancy"
+                        onChange={(e) => {
+                          setAdditionalOccupancy(e.target.value);
+                        }}
+                      >
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                      </select>
+                    </p>
+                  )}
               </div>
               <div className="m-3">
                 <p>Check In Date : {dates[0].format("DD-MM-YYYY")}</p>
                 <p>Check Out Date : {dates[1].format("DD-MM-YYYY")}</p>
+                <p>Room Type : {roomType} </p>
                 <p>Total No of Nights : {diff}</p>
-                <hr className="my-3" />
-                Rate per Day : {room.rentperday}
                 <p>
-                  Cost for {diff} days : {basicCost}
+                  {additionalOccupancy > 0
+                    ? `Additional Occupancy : ${additionalOccupancy}`
+                    : ""}
+                </p>
+                <hr className="my-3" />
+                <p>Basic Cost per Day : {basicCost}</p>
+                Rate per Day : {totalAmountPerDay}
+                <p>
+                  Cost for {diff} days : {totalAmountPerDay * diff}
                 </p>
                 <p>Additional Occupancy Cost : {additionalOccupancyCost}</p>
                 <p className="text-primary font-extrabold my-3">
-                  Total Cost : {totalCost}
+                  Total Amount : {totalAmount}
                 </p>
               </div>
             </div>
@@ -181,7 +193,7 @@ const BookingPageComponent = ({ room }) => {
           {dates && (
             <div>
               <StripeCheckout
-                amount={totalCost * 100}
+                amount={totalAmount * 100}
                 currency="INR"
                 token={onToken}
                 stripeKey="pk_test_51LFsZzSJDYv42pi4MhvAdwPuYV2HTzzDVTklvxuOt4o0le6vyYttWFP3GzTQ99eLi4rC6QYritaKmBXRsxDlXGoc00c5cl8hMc"

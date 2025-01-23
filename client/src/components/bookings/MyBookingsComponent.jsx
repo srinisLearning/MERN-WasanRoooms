@@ -83,6 +83,7 @@ const MyBookingsComponent = () => {
                 </p>
                 <p className="text-gray-700">From Date: {booking.fromdate}</p>
                 <p className="text-gray-700">To Date: {booking.todate}</p>
+                <p className="text-gray-700">Room Type: {booking.roomType}</p>
                 <p className="text-gray-700">Total Days: {booking.totalDays}</p>
                 <p className="text-gray-700">
                   Total Amount: {booking.totalAmount}
