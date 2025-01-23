@@ -15,6 +15,7 @@ router.get("/getAllRooms", async (req, res) => {
 
 router.get("/getRoomById/:id", async (req, res) => {
   const roomId = req.params.id;
+
   if (mongoose.Types.ObjectId.isValid(roomId)) {
     const room = await Room.findById(roomId);
     if (room) {

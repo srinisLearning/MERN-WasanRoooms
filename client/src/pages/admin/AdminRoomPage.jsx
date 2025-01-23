@@ -12,12 +12,15 @@ import AdminAddRoomModal from "./AdminAddRoomModal"; */
 const AdminBookingsPage = () => {
   const [rooms, setRooms] = useState([]);
   const [rooms2, setRooms2] = useState([]);
+  const [room, setRoom] = useState([]);
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState(false);
   const [success, setsuccess] = useState(false);
-  const [isAdminViewModalOpen, setIsAdminViewModalOpen] = useState(false);
+  const [adminViewModalOpen, setAdminViewModalOpen] = useState(false);
   /* const [isAdminAddModalOpen, setIsAdminAddModalOpen] = useState(false);
   const [isAdminEditModalOpen, setIsAdminEditModalOpen] = useState(false); */
+
+  console.log(adminViewModalOpen);
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -60,7 +63,7 @@ const AdminBookingsPage = () => {
           <ErrorComponent error={error} />
         ) : (
           <>
-            <div className="grid grid-rows-1 grid-cols-2 gap-4 border border-primary-300  p-4 my-3 shadow-xl max-w-4xl mx-auto rounded-xl">
+            <div className="grid grid-rows-1 grid-cols-3 gap-4 border border-primary-300  p-4 my-3 shadow-xl max-w-4xl mx-auto rounded-xl">
               <div className="flex flex-col mx-auto my-auto">
                 <input
                   placeholder="Search Room By City"
@@ -79,6 +82,11 @@ const AdminBookingsPage = () => {
                   />
                 </p>
               </div>
+              <div className="flex flex-col mx-auto my-auto">
+                <Link to="" className="bg-green-500 text-white p-2 rounded-lg">
+                  ADD ROOM
+                </Link>
+              </div>
             </div>
             <div className="max-w-6xl mx-auto">
               <table
@@ -92,8 +100,7 @@ const AdminBookingsPage = () => {
                     <th>City </th>
                     <th>Mobile No</th>
                     <th>Email</th>
-                    <th>Website</th>
-                    <th>Rent Per Day</th>
+
                     <th></th>
                     <th></th>
                     <th></th>
@@ -107,16 +114,15 @@ const AdminBookingsPage = () => {
                         <td>{room.city}</td>
                         <td>{room.phonenumber}</td>
                         <td>{room.email}</td>
-                        <td>{room.website}</td>
-                        <td>{room.rentperday}</td>
 
                         <td>
                           <Link
                             className="bg-blue-500 text-white m-2 p-2 rounded-lg"
                             to={` `}
                             onClick={() => {
-                              setIsAdminViewModalOpen(true);
-                              setRooms(rooms);
+                              setAdminViewModalOpen(true);
+                              setRoom(room);
+                              console.log(adminViewModalOpen);
                             }}
                           >
                             VIEW ALL
@@ -134,6 +140,7 @@ const AdminBookingsPage = () => {
                             EDIT
                           </Link> */}
                         </td>
+
                         <td>
                           {/*  <Link
                             className="bg-red-500 text-white m-2 p-2 rounded-lg"
@@ -155,9 +162,9 @@ const AdminBookingsPage = () => {
         )}
       </div>
       <AdminViewRoomModal
-        show={isAdminViewModalOpen}
-        onClose={() => setIsAdminViewModalOpen(false)}
-        rooms={rooms}
+        show={adminViewModalOpen}
+        onClose={() => setAdminViewModalOpen(false)}
+        room={room}
       />
       {/*   <AdminEditRoomModal
         show={isAdminEditModalOpen}
