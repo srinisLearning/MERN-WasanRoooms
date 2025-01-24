@@ -15,7 +15,7 @@ import ProfilePage from "./pages/ProfilePage";
 //import "dotenv/config";
 //BASE_URL = process.env.REACT_APP_API_URL;
 //axios.defaults.baseURL = BASE_URL;
-axios.defaults.baseURL = "https://wasanroomserver.vercel.app/:6066";
+axios.defaults.baseURL = "https://wasanroomserver.vercel.app:6066";
 function App() {
   //console.log(process.env.REACT_APP_API_URL);
   return (
