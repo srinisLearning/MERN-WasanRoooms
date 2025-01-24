@@ -3,12 +3,16 @@ const roomSchema = mongoose.Schema(
   {
     name: { type: String, required: true },
     description: { type: String, required: true },
-    currentbookings: [],
-    imageurls: [],
-    maxcount: { type: Number, required: true },
-    phonenumber: { type: Number, required: true },
-    rentperday: { type: Number, required: true },
-    type: { type: String, required: true },
+    city: { type: String, required: true },
+    imageUrl: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    website: { type: String, required: true },
+    phoneNumber: { type: Number, required: true },
+    rentPerDay: { type: Number, required: true },
+    singleStandardFactor: { type: Number, required: true },
+    doubleStandardFactor: { type: Number, required: true },
+    doublePremiumFactor: { type: Number, required: true },
+    suiteFactor: { type: Number, required: true },
   },
   { timestamps: true }
 );

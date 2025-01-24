@@ -29,4 +29,35 @@ router.get("/getRoomById/:id", async (req, res) => {
   }
 });
 
+router.post("/addRoom", async (req, res) => {
+  const {
+    name,
+    city,
+    imageurl,
+    phonenumber,
+    email,
+    website,
+    rentperday,
+    description,
+  } = req.body;
+
+  try {
+    const room = new Room({
+      name,
+      city,
+      imageurl,
+      email,
+      phonenumber,
+      website,
+      rentperday,
+      description,
+    });
+
+    const createdRoom = await room.save();
+    res.status(201).json(createdRoom);
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+});
+
 module.exports = router;

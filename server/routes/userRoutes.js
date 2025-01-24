@@ -113,4 +113,40 @@ router.put("/updateUser/:userId", async (req, res) => {
     return res.status(400).json({ message: error });
   }
 });
+
+router.post("/changepassword", async (req, res) => {
+  const { password, userid } = req.body;
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: userid },
+      { password },
+      { new: true }
+    );
+    if (user) {
+      res.send({ message: "Password Changed Successfully", user });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
+
+router.post("/changephone", async (req, res) => {
+  const { phone, userid } = req.body;
+  try {
+    const user = await User.findOneAndUpdate(
+      { _id: userid },
+      { mobile: phone },
+      { new: true }
+    );
+    if (user) {
+      res.send({ message: "Phone Number Changed Successfully", user });
+    } else {
+      res.status(404).json({ message: "User not found" });
+    }
+  } catch (error) {
+    return res.status(400).json({ message: error });
+  }
+});
 module.exports = router;

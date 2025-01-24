@@ -9,7 +9,12 @@ const LoginFormComponent = () => {
     email: "",
     password: "",
   });
-
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      window.location = "/home";
+    }
+  }, []);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 

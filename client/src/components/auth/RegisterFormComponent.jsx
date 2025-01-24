@@ -16,6 +16,13 @@ const RegisterFormComponent = () => {
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
 
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("loggedInUser");
+    if (loggedInUser) {
+      window.location = "/home";
+    }
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);

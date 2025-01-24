@@ -6,21 +6,24 @@ import LoadingComponent from "../../components/utils/LoadingComponent";
 import ErrorComponent from "../../components/utils/ErrorComponent";
 import { Link } from "react-router-dom";
 import AdminViewRoomModal from "./AdminViewRoomModal";
-/* import AdminEditRoomModal from "./AdminEditRoomModal";
-import AdminAddRoomModal from "./AdminAddRoomModal"; */
+import AdminEditRoomModal from "./AdminEditRoomModal";
+import AdminAddRoomModal from "./AdminAddRoomModal";
 
 const AdminBookingsPage = () => {
   const [rooms, setRooms] = useState([]);
   const [rooms2, setRooms2] = useState([]);
   const [room, setRoom] = useState([]);
+  //const [editable, setEditable] = useState(false);
   const [loading, setloading] = useState(false);
   const [error, seterror] = useState(false);
   const [success, setsuccess] = useState(false);
   const [adminViewModalOpen, setAdminViewModalOpen] = useState(false);
-  /* const [isAdminAddModalOpen, setIsAdminAddModalOpen] = useState(false);
-  const [isAdminEditModalOpen, setIsAdminEditModalOpen] = useState(false); */
+  const [adminAddModalOpen, setAdminAddModalOpen] = useState(false);
+  const [adminEditModalOpen, setAdminEditModalOpen] = useState(false);
 
-  console.log(adminViewModalOpen);
+  const [nameSearch, setNameSearch] = useState("");
+  const [citySearch, setCitySearch] = useState("");
+
   useEffect(() => {
     const fetchBookings = async () => {
       try {
@@ -83,7 +86,13 @@ const AdminBookingsPage = () => {
                 </p>
               </div>
               <div className="flex flex-col mx-auto my-auto">
-                <Link to="" className="bg-green-500 text-white p-2 rounded-lg">
+                <Link
+                  to=""
+                  className="bg-green-500 text-white p-2 rounded-lg px-10"
+                  onClick={() => {
+                    setAdminAddModalOpen(true);
+                  }}
+                >
                   ADD ROOM
                 </Link>
               </div>
@@ -129,28 +138,26 @@ const AdminBookingsPage = () => {
                           </Link>
                         </td>
                         <td>
-                          {/*  <Link
-                            className="bg-amber-500 text-white m-2 p-2 rounded-lg"
-                            to={` `}
+                          <Link
+                            to=""
+                            className="bg-amber-500 text-white p-2 rounded-lg"
                             onClick={() => {
-                              setIsAdminEditModalOpen(true);
-                              setRooms(rooms);
+                              setAdminEditModalOpen(true);
+                              setRoom(room);
                             }}
                           >
-                            EDIT
-                          </Link> */}
+                            EDIT ROOM
+                          </Link>
                         </td>
 
                         <td>
-                          {/*  <Link
+                          <Link
                             className="bg-red-500 text-white m-2 p-2 rounded-lg"
                             to={` `}
-                            onClick={() => {
-                              setIsAdminAddModalOpen(true);
-                            }}
+                            onClick={() => {}}
                           >
                             DELETE
-                          </Link> */}
+                          </Link>
                         </td>
                       </tr>
                     );
@@ -166,15 +173,27 @@ const AdminBookingsPage = () => {
         onClose={() => setAdminViewModalOpen(false)}
         room={room}
       />
+
       {/*   <AdminEditRoomModal
         show={isAdminEditModalOpen}
         onClose={() => setIsAdminEditModalOpen(false)}
         rooms={rooms}
       />
+      */}
       <AdminAddRoomModal
-        show={isAdminAddModalOpen}
-        onClose={() => setIsAdminAddModalOpen(false)}
-      /> */}
+        show={adminAddModalOpen}
+        onClose={() => {
+          setAdminAddModalOpen(false);
+        }}
+        room={room}
+      />
+      <AdminEditRoomModal
+        show={adminEditModalOpen}
+        onClose={() => {
+          setAdminEditModalOpen(false);
+        }}
+        room={room}
+      />
     </>
   );
 };
