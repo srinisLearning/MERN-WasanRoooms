@@ -4,19 +4,34 @@ import axios from "axios";
 
 const AdminEditRoomModal = ({ show, onClose, room }) => {
   console.log("Room", room);
+  const {
+    _id,
+    name,
+    city,
+    imageUrl,
+    phoneNo,
+    email,
+    website,
+    rentPerDay,
+    singleStandardFactor,
+    doubleStandardFactor,
+    doublePremiumFactor,
+    suiteFactor,
+    description,
+  } = room;
   const [formData, setFormData] = useState({
-    name: room.name,
-    city: room.city,
-    imageUrl: room.imageUrl,
-    phoneNo: room.phoneNo,
-    email: room.email,
-    website: room.website,
-    rentperday: room.rentPerDay,
-    singleStandardFactor: 1,
-    doubleStandardFactor: 1.5,
-    doublePremiumFactor: 2,
-    suiteFactor: 4,
-    description: room.description,
+    name,
+    city,
+    imageUrl,
+    phoneNo,
+    email,
+    website,
+    rentPerDay,
+    singleStandardFactor,
+    doubleStandardFactor,
+    doublePremiumFactor,
+    suiteFactor,
+    description,
   });
 
   console.log("formData", formData);

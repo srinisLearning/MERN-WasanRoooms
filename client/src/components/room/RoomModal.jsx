@@ -37,30 +37,30 @@ const RoomModal = ({ show, onClose, room }) => {
               Dinesh Kumar
             </p>
             <p>
-              <b className="font-extralight">Room Rate : </b>
-              &#8377; {room.rentperday} / Day for 2 Persons
-            </p>
-            <p>
-              <b className="font-extralight">Additional Person Rate : </b>
-              30 % of Room Rate / Day
-            </p>
-            <p>
-              <b className="font-extralight">
-                Max No of Persons : {room.maxcount}
-              </b>
-            </p>
-
-            <p>
-              <b className="font-extralight">Type : {room.type}</b>
-            </p>
-            <p>
               <b className="font-extralight">Check Out Time: </b>
               24 Hours
             </p>
+            <hr className="my-2" />
+            <b className="font-semibold">Room Rates</b>
             <p>
-              <b className="font-extralight">
-                Current Bookings : {room.currentbookings}
-              </b>
+              <b className="font-extralight">Single Standard Rate </b>
+              &#8377; {room.rentperday * room.singleStandardFactor}
+            </p>
+            <p>
+              <b className="font-extralight">Double Standard Rate </b>
+              &#8377; {room.rentperday * room.doubleStandardFactor}
+            </p>
+            <p>
+              <b className="font-extralight">Double Premium Rate </b>
+              &#8377; {room.rentperday * room.doublePremiumFactor}
+            </p>
+            <p>
+              <b className="font-extralight">Suite Rate </b>
+              &#8377; {room.rentperday * room.suiteFactor}
+            </p>
+            <p>
+              <b className="font-extralight">Additional Person Rate : </b>
+              &#8377; {room.rentperday * room.additionalOccupancyFactor}
             </p>
           </div>
         </div>
