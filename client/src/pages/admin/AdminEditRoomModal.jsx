@@ -65,7 +65,7 @@ const AdminEditRoomModal = ({ show, onClose, room }) => {
           <h3 className="text-primary text-center font-bold text-xl my-2">
             UPDATE ROOM
           </h3>
-          <form onSubmit={handleSubmit}>
+          {/*  <form onSubmit={handleSubmit}>
             <div className="flex  justify-between gap-6 items-center border-b-2 border-primary-200">
               <div className="flex flex-col gap-2">
                 <input
@@ -180,7 +180,7 @@ const AdminEditRoomModal = ({ show, onClose, room }) => {
                 UPDATE ROOM
               </button>
             </div>
-          </form>
+          </form> */}
           <div className="flex m-2 justify-end items-baseline">
             <button
               type="button"
